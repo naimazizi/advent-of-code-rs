@@ -4,6 +4,7 @@
 use anyhow::Result;
 
 // Import all detected year modules
+use crate::year2015;
 use crate::year2016;
 use crate::year2024;
 use crate::year2025;
@@ -27,6 +28,7 @@ fn find_solver(days: &[DayEntry], day: u8) -> Option<fn() -> Result<()>> {
 impl SolutionRegistry {
     pub fn get_solver(year: u16, day: u8) -> Option<fn() -> Result<()>> {
         match year {
+            2015 => find_solver(year2015::DAYS, day),
             2016 => find_solver(year2016::DAYS, day),
             2024 => find_solver(year2024::DAYS, day),
             2025 => find_solver(year2025::DAYS, day),
@@ -35,11 +37,12 @@ impl SolutionRegistry {
     }
 
     pub fn available_years() -> Vec<u16> {
-        vec![2016, 2024, 2025]
+        vec![2015, 2016, 2024, 2025]
     }
 
     pub fn available_days(year: u16) -> Vec<u8> {
         match year {
+            2015 => days_to_u8(year2015::DAYS),
             2016 => days_to_u8(year2016::DAYS),
             2024 => days_to_u8(year2024::DAYS),
             2025 => days_to_u8(year2025::DAYS),

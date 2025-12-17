@@ -11,8 +11,8 @@ reqwest.workspace = true
 colored.workspace = true
 
 # Optional: Uncomment these as needed for your solutions
-# regex.workspace = true
-# ahash.workspace = true
-# atoi.workspace = true
-# itertools.workspace = true
-# once_cell.workspace = true
+regex.workspace = true
+ahash.workspace = true
+atoi.workspace = true
+itertools.workspace = true
+once_cell.workspace = true
