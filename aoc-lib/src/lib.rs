@@ -1,6 +1,7 @@
 // aoc-lib/src/lib.rs
 
 pub mod utils;
+pub mod year2016;
 pub mod year2024;
 pub mod year2025;
 
