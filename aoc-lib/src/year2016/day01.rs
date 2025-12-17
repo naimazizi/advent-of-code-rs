@@ -23,21 +23,22 @@ pub fn solve() -> Result<()> {
 }
 
 // Helper functions to get direction vectors from input
-fn get_direction(input: &str) -> std::vec::IntoIter<(i32, i32)> {
-    let mapping_direction = HashMap::from([("R", 1), ("L", -1)]);
-
-    let directions: Vec<&str> = input.split(',').map(|s| s.trim()).collect();
-    let direction_vectors: Vec<(i32, i32)> = directions
-        .iter()
-        .map(|dir| {
-            let (turn, distance) = dir.split_at(1);
-            let distance: i32 = distance.parse().unwrap();
-            let turn_value = mapping_direction.get(turn).unwrap();
-
-            (*turn_value, distance)
-        })
-        .collect();
-    direction_vectors.into_iter()
+fn get_direction(input: &str) -> impl Iterator<Item = (i32, i32)> + '_ {
+    input.split(',').map(|s| s.trim()).filter_map(|dir| {
+        let mut chars = dir.chars();
+        let turn_char = chars.next()?;
+        let distance_str = chars.as_str();
+        let distance = match distance_str.parse::<i32>() {
+            Ok(d) => d,
+            Err(_) => return None,
+        };
+        let turn = match turn_char {
+            'R' | 'r' => 1,
+            'L' | 'l' => -1,
+            _ => return None,
+        };
+        Some((turn, distance))
+    })
 }
 
 fn calc_manhattan_distance(pos: (i32, i32)) -> i32 {
