@@ -4,10 +4,12 @@
 use anyhow::Result;
 
 mod day01;
+mod day02;
+
 
 type DayEntry = (&'static str, fn() -> Result<()>);
-
 pub const DAYS: &[DayEntry] =
 &[
     ("1", day01::solve),
+    ("2", day02::solve),
 ];
